@@ -73,9 +73,9 @@ class SpaceshipServiceTests {
         Spaceship spaceship = new Spaceship();
         spaceship.setName("X-Wing");
 
-        when(spaceshipRepository.findSpaceshipByName("X-Wing")).thenReturn(Collections.singletonList(spaceship));
+        when(spaceshipRepository.searchByNameContainingIgnoreCase("Wing")).thenReturn(Collections.singletonList(spaceship));
 
-        ResponseEntity<List<Spaceship>> response = spaceshipService.getSpaceshipsByName("X-Wing");
+        ResponseEntity<List<Spaceship>> response = spaceshipService.getSpaceshipsByName("Wing");
 
         assertNotNull(response.getBody());
         assertFalse(response.getBody().isEmpty());

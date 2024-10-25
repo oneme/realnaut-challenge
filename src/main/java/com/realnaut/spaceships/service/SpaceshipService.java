@@ -44,9 +44,9 @@ public class SpaceshipService {
         return repository.save(spaceship);
     }
 
-    @Cacheable(value = "spaceshipsCache", key = "name")
+    @Cacheable(value = "spaceshipsCache", key = "#name")
     public ResponseEntity<List<Spaceship>> getSpaceshipsByName(String name) {
-        return ResponseEntity.ok(this.repository.findSpaceshipByName(name));
+        return ResponseEntity.ok(this.repository.searchByNameContainingIgnoreCase(name));
     }
     @Cacheable(value = "spaceshipsCache", key = "#id")
     public ResponseEntity<Spaceship> getSpaceshipById(Long id) throws ResourceNotFound {
