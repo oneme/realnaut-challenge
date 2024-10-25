@@ -40,6 +40,7 @@ public class SpaceshipService {
     public Spaceship createSpaceship(SpaceshipRequest spaceshipRequest) {
         Spaceship spaceship = new Spaceship();
         spaceship.setName(spaceshipRequest.getName());
+        mapSpaceshipRequestToSpaceship(spaceshipRequest, spaceship);
 
         return repository.save(spaceship);
     }
@@ -60,7 +61,7 @@ public class SpaceshipService {
         Spaceship spaceship = this.repository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Spaceship not found with this id :: " + id));
-        spaceship.setName(spaceshipRequest.getName());
+        mapSpaceshipRequestToSpaceship(spaceshipRequest, spaceship);
 
         this.repository.save(spaceship);
     }
@@ -72,6 +73,16 @@ public class SpaceshipService {
                 .orElseThrow(() -> new ResourceNotFound("Spaceship not found with this id :: " + id));
 
         this.repository.delete(spaceship);
+    }
+
+    private void mapSpaceshipRequestToSpaceship(SpaceshipRequest spaceshipRequest, Spaceship spaceship) {
+        spaceship.setName(spaceshipRequest.getName());
+        if (null != spaceshipRequest.getSeries()) {
+            spaceship.setSeries(spaceshipRequest.getSeries());
+        }
+        if (null != spaceshipRequest.getType()) {
+            spaceship.setType(spaceshipRequest.getType());
+        }
     }
 
 }

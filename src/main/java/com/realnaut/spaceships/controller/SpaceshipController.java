@@ -6,6 +6,7 @@ import com.realnaut.spaceships.payload.ApiResponse;
 import com.realnaut.spaceships.payload.PagedResponse;
 import com.realnaut.spaceships.payload.SpaceshipRequest;
 import com.realnaut.spaceships.service.SpaceshipService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -56,7 +57,7 @@ public class SpaceshipController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> updateSpaceship(
             @PathVariable Long id,
-            @RequestBody SpaceshipRequest spaceshipRequest)
+            @Valid @RequestBody SpaceshipRequest spaceshipRequest)
             throws ResourceNotFound {
 
         service.updateSpaceship(id, spaceshipRequest);
