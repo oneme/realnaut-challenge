@@ -12,3 +12,5 @@ INSERT INTO spaceship (name, series, type) VALUES ('Thunderbird 3', 'Thunderbird
 INSERT INTO spaceship (name, series, type) VALUES ('Icarus II', 'Sunshine', 'Solar Explorer');
 INSERT INTO spaceship (name, series, type) VALUES ('X-Wing', 'Star Wars', 'Starfighter');
 
+INSERT INTO users (name, email, password) VALUES ('realnaut-user', 'user@realnaut.com', '$2a$10$8YiCghWvC9UK6/mpy/9lPuq3TZoDbjbMJY.1HnBdtDrRgw48/8i62');
+

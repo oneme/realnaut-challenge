@@ -2,8 +2,11 @@ package com.realnaut.spaceships;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.realnaut.spaceships.model.Spaceship;
+import com.realnaut.spaceships.model.User;
 import com.realnaut.spaceships.payload.SpaceshipRequest;
 import com.realnaut.spaceships.repository.SpaceshipRepository;
+import com.realnaut.spaceships.repository.UserRepository;
+import com.realnaut.spaceships.security.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +33,26 @@ public class SpaceshipsControllerIntegrationTests {
     private SpaceshipRepository spaceshipRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private JwtService jwtService;
+
+    private String token;
 
     @BeforeEach
     void setUp() {
         spaceshipRepository.deleteAll();
+        userRepository.deleteAll();
+        User user = new User();
+        user.setName("tester");
+        user.setEmail("tester@realnaut.com");
+        user.setPassword("$2a$10$8YiCghWvC9UK6/mpy/9lPuq3TZoDbjbMJY.1HnBdtDrRgw48/8i62");
+        userRepository.save(user);
+        token = jwtService.generateToken(user);
     }
 
     @Test
@@ -43,6 +61,7 @@ public class SpaceshipsControllerIntegrationTests {
         spaceshipRequest.setName("Millennium Falcon");
 
         ResultActions response = mockMvc.perform(post("/api/v1/spaceships")
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(spaceshipRequest)));
 
@@ -63,6 +82,7 @@ public class SpaceshipsControllerIntegrationTests {
         spaceshipRepository.save(spaceship2);
 
         ResultActions response = mockMvc.perform(get("/api/v1/spaceships")
+                .header("Authorization", "Bearer " + token)
                 .param("page", "0")
                 .param("size", "5")
                 .contentType(MediaType.APPLICATION_JSON));
@@ -80,6 +100,7 @@ public class SpaceshipsControllerIntegrationTests {
         spaceship = spaceshipRepository.save(spaceship);
 
         ResultActions response = mockMvc.perform(get("/api/v1/spaceships/{id}", spaceship.getId())
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON));
 
         response.andExpect(status().isOk())
@@ -93,6 +114,7 @@ public class SpaceshipsControllerIntegrationTests {
         spaceshipRepository.save(spaceship);
 
         ResultActions response = mockMvc.perform(get("/api/v1/spaceships/search")
+                .header("Authorization", "Bearer " + token)
                 .param("name", "X-Wing")
                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -111,6 +133,7 @@ public class SpaceshipsControllerIntegrationTests {
         updatedRequest.setName("X-Wing Updated");
 
         ResultActions response = mockMvc.perform(put("/api/v1/spaceships/{id}", spaceship.getId())
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedRequest)));
 
@@ -126,6 +149,7 @@ public class SpaceshipsControllerIntegrationTests {
         spaceship = spaceshipRepository.save(spaceship);
 
         ResultActions response = mockMvc.perform(delete("/api/v1/spaceships/{id}", spaceship.getId())
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON));
 
         response.andExpect(status().isNoContent());
@@ -136,6 +160,7 @@ public class SpaceshipsControllerIntegrationTests {
         SpaceshipRequest spaceshipRequest = new SpaceshipRequest();
 
         ResultActions response = mockMvc.perform(post("/api/v1/spaceships")
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(spaceshipRequest)));
 
@@ -156,6 +181,7 @@ public class SpaceshipsControllerIntegrationTests {
 
 
         ResultActions response = mockMvc.perform(put("/api/v1/spaceships/{id}", spaceship.getId())
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedRequest)));
 
