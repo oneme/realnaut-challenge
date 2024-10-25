@@ -5,6 +5,7 @@ import com.realnaut.spaceships.model.Spaceship;
 import com.realnaut.spaceships.payload.PagedResponse;
 import com.realnaut.spaceships.payload.SpaceshipRequest;
 import com.realnaut.spaceships.repository.SpaceshipRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +38,7 @@ public class SpaceshipService {
                 spaceship.isLast()
         );
     }
+    @CacheEvict(value = "spaceshipCache", allEntries = true)
     public Spaceship createSpaceship(SpaceshipRequest spaceshipRequest) {
         Spaceship spaceship = new Spaceship();
         spaceship.setName(spaceshipRequest.getName());
@@ -56,7 +58,7 @@ public class SpaceshipService {
                 .orElseThrow(() -> new ResourceNotFound("Spaceship not found with id :: " + id));
         return ResponseEntity.ok(spaceship);
     }
-
+    @CacheEvict(value = "spaceshipCache", key = "#id")
     public void updateSpaceship(Long id, SpaceshipRequest spaceshipRequest) throws ResourceNotFound {
         Spaceship spaceship = this.repository
                 .findById(id)
@@ -66,7 +68,7 @@ public class SpaceshipService {
         this.repository.save(spaceship);
     }
 
-
+    @CacheEvict(value = "spaceshipCache", key = "#id")
     public void deleteSpaceship(Long id) throws ResourceNotFound {
         Spaceship spaceship = this.repository
                 .findById(id)

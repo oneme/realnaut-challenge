@@ -42,7 +42,7 @@ public class SpaceshipController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse> createSpaceship(@RequestBody SpaceshipRequest spaceshipRequest)
+    public ResponseEntity<ApiResponse> createSpaceship(@Valid @RequestBody SpaceshipRequest spaceshipRequest)
             throws ResourceNotFound {
         Spaceship spaceship = service.createSpaceship(spaceshipRequest);
         URI location = ServletUriComponentsBuilder
