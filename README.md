@@ -1,6 +1,6 @@
 # Proyecto de Spaceships
 
-Este proyecto es una aplicación de gestión de naves espaciales construida con Spring Boot y Docker. Aquí te mostramos cómo ejecutar los tests y levantar los contenedores Docker.
+Este proyecto es una aplicación de gestión de naves espaciales construida con Spring Boot y Docker. Aquí mostramos cómo ejecutar los tests y levantar los contenedores Docker.
 
 ## Prerrequisitos
 
