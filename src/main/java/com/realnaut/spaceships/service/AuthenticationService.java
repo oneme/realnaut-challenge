@@ -7,6 +7,7 @@ import com.realnaut.spaceships.payload.LoginUserRequest;
 import com.realnaut.spaceships.repository.UserRepository;
 import com.realnaut.spaceships.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,8 @@ public class AuthenticationService {
         this.jwtService = jwtService;
     }
 
-    public LoginResponse authenticate(LoginUserRequest loginUserRequest) throws ResourceNotFound {
+    public LoginResponse authenticate(LoginUserRequest loginUserRequest) throws
+            BadCredentialsException, ResourceNotFound {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginUserRequest.getEmail(),
