@@ -1,12 +1,12 @@
 package com.realnaut.spaceships;
 
-import com.realnaut.spaceships.exception.ResourceNotFound;
-import com.realnaut.spaceships.model.User;
-import com.realnaut.spaceships.payload.LoginResponse;
-import com.realnaut.spaceships.payload.LoginUserRequest;
-import com.realnaut.spaceships.repository.UserRepository;
-import com.realnaut.spaceships.security.JwtService;
-import com.realnaut.spaceships.service.AuthenticationService;
+import com.realnaut.spaceships.core.exception.ResourceNotFound;
+import com.realnaut.spaceships.core.model.User;
+import com.realnaut.spaceships.application.payload.LoginResponse;
+import com.realnaut.spaceships.application.payload.LoginUserRequest;
+import com.realnaut.spaceships.infrastructure.repository.UserRepository;
+import com.realnaut.spaceships.infrastructure.security.JwtService;
+import com.realnaut.spaceships.core.service.AuthenticationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

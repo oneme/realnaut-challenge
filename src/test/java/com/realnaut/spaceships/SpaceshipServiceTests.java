@@ -1,11 +1,11 @@
 package com.realnaut.spaceships;
 
-import com.realnaut.spaceships.exception.ResourceNotFound;
-import com.realnaut.spaceships.model.Spaceship;
-import com.realnaut.spaceships.payload.PagedResponse;
-import com.realnaut.spaceships.payload.SpaceshipRequest;
-import com.realnaut.spaceships.repository.SpaceshipRepository;
-import com.realnaut.spaceships.service.SpaceshipService;
+import com.realnaut.spaceships.core.exception.ResourceNotFound;
+import com.realnaut.spaceships.core.model.Spaceship;
+import com.realnaut.spaceships.application.payload.PagedResponse;
+import com.realnaut.spaceships.application.payload.SpaceshipRequest;
+import com.realnaut.spaceships.infrastructure.repository.SpaceshipRepository;
+import com.realnaut.spaceships.core.service.SpaceshipService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

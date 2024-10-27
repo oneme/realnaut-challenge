@@ -24,3 +24,10 @@ Para levantar los contenedores, utiliza Docker Compose con el siguiente comando:
 
 ```bash
 docker compose up --build
+```
+
+## Consultar la documentación de la API
+
+Para consultar la documentación de la API, utiliza esta url:
+
+http://localhost:8080/swagger-ui/index.html

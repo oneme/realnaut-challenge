@@ -1,12 +1,12 @@
 package com.realnaut.spaceships;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.realnaut.spaceships.model.Spaceship;
-import com.realnaut.spaceships.model.User;
-import com.realnaut.spaceships.payload.SpaceshipRequest;
-import com.realnaut.spaceships.repository.SpaceshipRepository;
-import com.realnaut.spaceships.repository.UserRepository;
-import com.realnaut.spaceships.security.JwtService;
+import com.realnaut.spaceships.core.model.Spaceship;
+import com.realnaut.spaceships.core.model.User;
+import com.realnaut.spaceships.application.payload.SpaceshipRequest;
+import com.realnaut.spaceships.infrastructure.repository.SpaceshipRepository;
+import com.realnaut.spaceships.infrastructure.repository.UserRepository;
+import com.realnaut.spaceships.infrastructure.security.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
