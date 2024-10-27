@@ -28,7 +28,7 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserRequest loginUserRequest)
             throws BadCredentialsException, ResourceNotFound {
         messageProducer.sendMessage("login-topic",
-                String.format("User with email: %s is trying to login", loginUserRequest.getEmail()));
+                String.format("User with email: %s is attempting to login", loginUserRequest.getEmail()));
         return ResponseEntity.ok(authenticationService.authenticate(loginUserRequest));
     }
 }
